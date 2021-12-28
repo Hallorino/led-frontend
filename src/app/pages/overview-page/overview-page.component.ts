@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Mode } from 'src/app/models/mode.model';
 import { Settings } from 'src/app/models/settings.model';
+import { ApiService } from 'src/app/services/api.service';
 
 @Component({
   selector: 'app-overview-page',
@@ -9,7 +10,8 @@ import { Settings } from 'src/app/models/settings.model';
 })
 export class OverviewPageComponent implements OnInit {
 
-  constructor() { }
+  constructor(private api: ApiService) { }
+
   modes : Mode[] = [
     {name: "Rainbow"},
     {name: "Lava"},
@@ -29,6 +31,21 @@ export class OverviewPageComponent implements OnInit {
   }
 
   ngOnInit(): void {
+  }
+
+  getDataFromApi() {
+    this.api.getAllModes().subscribe(modes => {
+      this.modes = modes;
+    });
+    this.api.getSettings().subscribe(settings => {
+      this.currentSettings = settings;
+    });
+  }
+
+  onChangedSettings() {
+    this.api.updateSettings(this.currentSettings).subscribe((newSettings: Settings) => {
+      this.currentSettings = newSettings;
+    });
   }
 
   onButtonClick() {
