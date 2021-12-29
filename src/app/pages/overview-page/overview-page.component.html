@@ -1,18 +1,39 @@
-<h1>ok CHEFFFFF</h1>
+<nb-card>
+  <nb-card-header>
+    <h1>Settings</h1>
+  </nb-card-header>
+  <nb-card-body>
 
-<p>{{buttonclick}}</p>
-<p>Mode:{{currentSettings.currentMode}}</p>
-<p>Brightness:{{currentSettings.brightness}}</p>
-<p>FPS:{{currentSettings.fps}}</p>
-<p>HasBlend:{{currentSettings.hasBlend}}</p>
+    <h2>Mode</h2>
 
-<button type="button" (click)="onButtonClick()">{{buttontext}}</button>
-<input type="range" min="1" max="255" [(ngModel)]="currentSettings.fps" (change)="onChangedSettings()">
-<input type="range" min="1" max="255" [(ngModel)]="currentSettings.brightness" (change)="onChangedSettings()">
-<input type="checkbox" [(ngModel)]="currentSettings.hasBlend" (change)="onChangedSettings()">
+    <nb-select [(selected)]="currentSettings.currentMode">
+      <nb-select-label>
+        Selected: {{ currentSettings.currentMode }}
+      </nb-select-label>
+      <nb-option *ngFor="let mode of modes" [value]="mode.name">{{mode.name}}</nb-option>
+    </nb-select>
 
 
+    <h2>FPS</h2>
 
-<select [(ngModel)]="currentSettings.currentMode" (change)="onChangedSettings()"> 
-  <option *ngFor="let mode of modes" [value]="mode.name" [selected]="mode.name == currentSettings.currentMode">{{mode.name}}</option>
-</select>
+      <ngx-slider id="fps" [(value)]="currentSettings.fps" [options]="{
+        floor: 1,
+        ceil: 255
+      }" (valueChange)="onChangedSettings()"></ngx-slider>
+
+
+      <h2>Brightness</h2>
+
+
+      <ngx-slider [(value)]="currentSettings.brightness" [options]="{
+        floor: 0,
+        ceil: 255
+      }" (valueChange)="onChangedSettings()"></ngx-slider>
+
+    <h2>Blend</h2>
+
+
+    <nb-toggle [(ngModel)]="currentSettings.hasBlend" (change)="onChangedSettings()">HasBlend</nb-toggle>
+
+  </nb-card-body>
+</nb-card>
