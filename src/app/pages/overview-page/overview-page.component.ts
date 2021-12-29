@@ -31,6 +31,7 @@ export class OverviewPageComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.getDataFromApi();
   }
 
   getDataFromApi() {

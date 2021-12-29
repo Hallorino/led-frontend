@@ -22,11 +22,11 @@ export class ApiService {
   }
 
   testConnection(): Observable<Settings> {
-    return this.http.get<Settings>(`http://${this.baseUrl}/led-strip/`);
+    return this.http.get<Settings>(`http://${this.baseUrl}/settings/`);
   }
 
   testConnectionOnIp(ip: string): Observable<Settings> {
-    return this.http.get<Settings>(`http://${ip}/led-strip/`);
+    return this.http.get<Settings>(`http://${ip}/settings/`);
   }
 
   getAllModes(): Observable<Mode[]> {
@@ -34,10 +34,10 @@ export class ApiService {
   }
 
   getSettings(): Observable<Settings> {
-    return this.http.get<Settings>(`http://${this.baseUrl}/led-strip/`);
+    return this.http.get<Settings>(`http://${this.baseUrl}/settings/`);
   }
 
   updateSettings(settings: Settings): Observable<Settings> {
-    return this.http.patch<Settings>(`http://${this.baseUrl}/led-strip/`, settings);
+    return this.http.patch<Settings>(`http://${this.baseUrl}/settings/`, settings);
   }
 }

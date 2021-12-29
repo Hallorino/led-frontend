@@ -7,12 +7,12 @@
 <p>HasBlend:{{currentSettings.hasBlend}}</p>
 
 <button type="button" (click)="onButtonClick()">{{buttontext}}</button>
-<input type="range" min="1" max="255" [(ngModel)]="currentSettings.fps">
-<input type="range" min="1" max="255" [(ngModel)]="currentSettings.brightness">
-<input type="checkbox" [(ngModel)]="currentSettings.hasBlend">
+<input type="range" min="1" max="255" [(ngModel)]="currentSettings.fps" (change)="onChangedSettings()">
+<input type="range" min="1" max="255" [(ngModel)]="currentSettings.brightness" (change)="onChangedSettings()">
+<input type="checkbox" [(ngModel)]="currentSettings.hasBlend" (change)="onChangedSettings()">
 
 
 
-<select>
+<select [(ngModel)]="currentSettings.currentMode" (change)="onChangedSettings()"> 
   <option *ngFor="let mode of modes" [value]="mode.name" [selected]="mode.name == currentSettings.currentMode">{{mode.name}}</option>
 </select>
