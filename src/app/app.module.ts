@@ -7,20 +7,17 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import { FooterComponent } from './shared/footer/footer.component';
 import { HeaderComponent } from './shared/header/header.component';
-import { OverviewPageComponent } from './pages/overview-page/overview-page.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
-import { NbThemeModule, NbLayoutModule, NbToggleModule, NbCardModule, NbSelectModule } from '@nebular/theme';
+import { NbThemeModule, NbLayoutModule} from '@nebular/theme';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
-import { NgxSliderModule } from '@angular-slider/ngx-slider';
 
 @NgModule({
   declarations: [
     AppComponent,
     FooterComponent,
     HeaderComponent,
-    OverviewPageComponent
   ],
   imports: [
     BrowserModule,
@@ -28,11 +25,6 @@ import { NgxSliderModule } from '@angular-slider/ngx-slider';
     FormsModule,
     HttpClientModule,
     NbThemeModule.forRoot(),
-    NbToggleModule,
-    NbLayoutModule,
-    NbCardModule,
-    NbSelectModule,
-    NgxSliderModule,
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: environment.production,
       // Register the ServiceWorker as soon as the app is stable
