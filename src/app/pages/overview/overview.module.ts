@@ -5,6 +5,7 @@ import { NgxSliderModule } from '@angular-slider/ngx-slider';
 import { OverviewPageComponent } from './overview-page/overview-page.component';
 import { FormsModule } from '@angular/forms';
 import { OverviewRoutingModule } from './overview-routing.module';
+import { ColorChromeModule   } from 'ngx-color/chrome';
 
 
 
@@ -20,7 +21,8 @@ import { OverviewRoutingModule } from './overview-routing.module';
     NbSelectModule,
     NgxSliderModule,
     FormsModule,
-    OverviewRoutingModule
+    OverviewRoutingModule,
+    ColorChromeModule 
   ]
 })
 export class OverviewModule { }

@@ -1,5 +1,7 @@
 export interface Settings {
-    currentMode: string;
+    currentMode: number;
+    currentPalette: string;
+    currentColor: string;
     brightness: number;
     fps: number;
     hasBlend: boolean;

@@ -24,6 +24,7 @@
     "@nebular/eva-icons": "9.0.0",
     "@nebular/theme": "^9.0.0",
     "eva-icons": "^1.1.2",
+    "ngx-color": "^7.3.3",
     "rxjs": "~7.4.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.11.4"

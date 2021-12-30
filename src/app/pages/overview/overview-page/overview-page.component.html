@@ -6,9 +6,9 @@
 
     <h2>Mode</h2>
 
-    <nb-select [(selected)]="currentSettings.currentMode">
+    <nb-select [(selected)]="currentSettings.currentPalette" (selectedChange)="onChangedSettings()">
       <nb-select-label>
-        Selected: {{ currentSettings.currentMode }}
+        Selected: {{ currentSettings.currentPalette }}
       </nb-select-label>
       <nb-option *ngFor="let mode of modes" [value]="mode.name">{{mode.name}}</nb-option>
     </nb-select>
@@ -37,3 +37,6 @@
 
   </nb-card-body>
 </nb-card>
+<p>{{currentSettings.currentColor}}</p>
+<color-chrome (onChange)="onChangedSettings2($event)" [disableAlpha]="true"rome>
+

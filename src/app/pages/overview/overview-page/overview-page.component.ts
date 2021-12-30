@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ColorEvent } from 'ngx-color';
 import { Mode } from 'src/app/models/mode.model';
 import { Settings } from 'src/app/models/settings.model';
 import { ApiService } from 'src/app/services/api.service';
@@ -24,7 +25,9 @@ export class OverviewPageComponent implements OnInit {
   buttontext: string = "mein string";
   buttonclick: number = 0;
   currentSettings: Settings = {
-    currentMode: "Lava",
+    currentMode: 0,
+    currentColor: "",
+    currentPalette: "Lava",
     brightness: 42,
     fps: 7,
     hasBlend: true
@@ -44,6 +47,17 @@ export class OverviewPageComponent implements OnInit {
   }
 
   onChangedSettings() {
+    this.currentSettings.currentMode = 0;
+    this.api.updateSettings(this.currentSettings).subscribe((newSettings: Settings) => {
+      this.currentSettings = newSettings;
+    });
+  }
+
+  onChangedSettings2($event : ColorEvent) {
+    let hexString = $event.color.hex;
+    this.currentSettings.currentColor = hexString.replace("#", "0x");
+    this.currentSettings.currentMode = 1;
+
     this.api.updateSettings(this.currentSettings).subscribe((newSettings: Settings) => {
       this.currentSettings = newSettings;
     });
