@@ -67,7 +67,7 @@
 
   <input type="number" [(ngModel)]="paletteNumber">
   <color-chrome (onChangeComplete)="setCustomModeColor($event, paletteNumber)" [disableAlpha]="true"></color-chrome>
-  <button (click)="onChangedSettings()">Send color</button>
+  <button (click)="pushCustomPalette()">Send color</button>
 </nb-card>
 
 
