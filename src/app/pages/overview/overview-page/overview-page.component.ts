@@ -71,4 +71,9 @@ export class OverviewPageComponent implements OnInit {
   changeMode(mode: number) {
     this.currentMode = mode;
   }
+
+  updateStep(value :any) {
+    this.currentSettings.currentStep = value[0];
+    this.onChangedSettings();
+  }
 }

@@ -27,11 +27,11 @@
           }" (valueChange)="onChangedSettings()"></ngx-slider>
 
         <h2>Step</h2>
-
-        <ngx-slider [(value)]="currentSettings.currentStep" [options]="{
-              floor: -3,
-              ceil: 3
-            }" (valueChange)="onChangedSettings()"></ngx-slider>
+          <nb-button-group (valueChange)="updateStep($event)">
+            <button nbButtonToggle value="-3" [pressed]="currentSettings.currentStep ==-3"><nb-icon icon="skip-back-outline"></nb-icon></button>
+            <button nbButtonToggle value="0" [pressed]="currentSettings.currentStep ==0"><nb-icon icon="pause-circle-outline"></nb-icon></button>
+            <button nbButtonToggle value="3" [pressed]="currentSettings.currentStep ==3"><nb-icon icon="skip-forward-outline"></nb-icon></button>
+          </nb-button-group>
 
         <h2>Blend</h2>
 
