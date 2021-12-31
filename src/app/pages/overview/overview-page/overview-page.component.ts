@@ -13,28 +13,23 @@ export class OverviewPageComponent implements OnInit {
 
   constructor(private api: ApiService) { }
 
-  modes : Mode[] = [
-    {name: "Rainbow"},
-    {name: "Lava"},
-    {name: "Heat"},
-    {name: "Ocean"},
-    {name: "Forest"},
-    {name: "Party"}
-  ];
+  currentMode = 0;
+
+  modes : Mode[] = [];
 
   customModeColors = ["#000000", "#000000", "#000000", "#000000", "#000000", "#000000", "#000000", "#000000", "#000000", "#000000", "#000000", "#000000", "#000000", "#000000", "#000000", "#000000"];
   paletteNumber = 0;
 
   buttontext: string = "mein string";
   buttonclick: number = 0;
-  currentSettings: Settings = {
+  currentSettings: Settings ={
     currentMode: 0,
-    currentColor: "",
-    currentPalette: "Lava",
-    brightness: 42,
-    fps: 7,
-    hasBlend: true
-  }
+    currentColor: "0x000000",
+    brightness: 0,
+    currentPalette: "",
+    fps: 0,
+    hasBlend: false,
+  };
 
   ngOnInit(): void {
     this.getDataFromApi();
@@ -50,26 +45,20 @@ export class OverviewPageComponent implements OnInit {
   }
 
   onChangedSettings() {
-    this.currentSettings.currentMode = 0;
     this.api.updateSettings(this.currentSettings).subscribe((newSettings: Settings) => {
       this.currentSettings = newSettings;
     });
   }
 
-  onChangedSettings2($event : ColorEvent) {
+  onChangedColor($event : ColorEvent) {
     let hexString = $event.color.hex;
     this.currentSettings.currentColor = hexString.replace("#", "0x");
-    this.currentSettings.currentMode = 1;
-
-    this.api.updateSettings(this.currentSettings).subscribe((newSettings: Settings) => {
-      this.currentSettings = newSettings;
-    });
+    this.onChangedSettings();
   }
 
   setCustomModeColor($event : ColorEvent, index: number) {
     let hexString = $event.color.hex;
     this.customModeColors[index] = hexString.replace("#", "0x");
-    console.log(this.customModeColors[index]);
   }
 
   pushCustomPalette() {
@@ -78,8 +67,7 @@ export class OverviewPageComponent implements OnInit {
     });
   }
 
-  onButtonClick() {
-    this.buttontext = "Baby click me on more Time!";
-    this.buttonclick++;
+  changeMode(mode: number) {
+    this.currentMode = mode;
   }
 }

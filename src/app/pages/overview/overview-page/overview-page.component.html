@@ -1,73 +1,83 @@
-<nb-card>
+<nb-card *ngIf="modes.length !== 0; else noConnection">
   <nb-card-header>
     <h1>Settings</h1>
   </nb-card-header>
   <nb-card-body>
+    <nb-tabset fullWidth>
+      <nb-tab tabTitle="Palette" active="{{changeMode(0)}}">
+        <h2>Mode</h2>
 
-    <h2>Mode</h2>
+        <nb-select [(selected)]="currentSettings.currentPalette" (selectedChange)="onChangedSettings()">
+          <nb-select-label>Selected: {{ currentSettings.currentPalette }}</nb-select-label>
+          <nb-option *ngFor="let mode of modes" [value]="mode.name">{{mode.name}}</nb-option>
+        </nb-select>
 
-    <nb-select [(selected)]="currentSettings.currentPalette" (selectedChange)="onChangedSettings()">
-      <nb-select-label>
-        Selected: {{ currentSettings.currentPalette }}
-      </nb-select-label>
-      <nb-option *ngFor="let mode of modes" [value]="mode.name">{{mode.name}}</nb-option>
-    </nb-select>
+        <h2>FPS</h2>
 
+        <ngx-slider id="fps" [(value)]="currentSettings.fps" [options]="{
+            floor: 1,
+            ceil: 510
+          }" (valueChange)="onChangedSettings()"></ngx-slider>
 
-    <h2>FPS</h2>
+        <h2>Brightness</h2>
 
-      <ngx-slider id="fps" [(value)]="currentSettings.fps" [options]="{
-        floor: 1,
-        ceil: 510
-      }" (valueChange)="onChangedSettings()"></ngx-slider>
+        <ngx-slider [(value)]="currentSettings.brightness" [options]="{
+            floor: 0,
+            ceil: 255
+          }" (valueChange)="onChangedSettings()"></ngx-slider>
 
+        <h2>Blend</h2>
 
-      <h2>Brightness</h2>
-
-
-      <ngx-slider [(value)]="currentSettings.brightness" [options]="{
-        floor: 0,
-        ceil: 255
-      }" (valueChange)="onChangedSettings()"></ngx-slider>
-
-    <h2>Blend</h2>
+        <nb-toggle [(ngModel)]="currentSettings.hasBlend" (change)="onChangedSettings()">HasBlend</nb-toggle>
 
 
-    <nb-toggle [(ngModel)]="currentSettings.hasBlend" (change)="onChangedSettings()">HasBlend</nb-toggle>
+        <div *ngIf="currentSettings.currentPalette == 'Custom'">
+          <h1>Custom Palette</h1>
+          <p>{{ this.customModeColors[0] }}</p>
+          <p>{{ this.customModeColors[1] }}</p>
+          <p>{{ this.customModeColors[2] }}</p>
+          <p>{{ this.customModeColors[3] }}</p>
+          <p>{{ this.customModeColors[4] }}</p>
+          <p>{{ this.customModeColors[5] }}</p>
+          <p>{{ this.customModeColors[6] }}</p>
+          <p>{{ this.customModeColors[7] }}</p>
+          <p>{{ this.customModeColors[8] }}</p>
+          <p>{{ this.customModeColors[9] }}</p>
+          <p>{{ this.customModeColors[10] }}</p>
+          <p>{{ this.customModeColors[11] }}</p>
+          <p>{{ this.customModeColors[12] }}</p>
+          <p>{{ this.customModeColors[13] }}</p>
+          <p>{{ this.customModeColors[14] }}</p>
+          <p>{{ this.customModeColors[15] }}</p>
+        
+          <input type="number" [(ngModel)]="paletteNumber" />
+          <color-chrome (onChangeComplete)="setCustomModeColor($event, paletteNumber)" [disableAlpha]="true"></color-chrome>
+          <button (click)="pushCustomPalette()">Send color</button>
+        </div>
 
+      </nb-tab>
+
+      <nb-tab tabTitle="Color" active="{{changeMode(1)}}">
+        <h2>Brightness</h2>
+
+        <ngx-slider [(value)]="currentSettings.brightness" [options]="{
+            floor: 0,
+            ceil: 255
+          }" (valueChange)="onChangedSettings()"></ngx-slider>
+
+        <h2>Custom color</h2>
+        <p>{{ currentSettings.currentColor }}</p>
+        <color-chrome (onChange)="onChangedColor($event)" [disableAlpha]="true"></color-chrome>
+      </nb-tab>
+    </nb-tabset>
   </nb-card-body>
 </nb-card>
 
-<nb-card>
-  <h1>Custom color</h1>
-  <p>{{currentSettings.currentColor}}</p>
-  <color-chrome (onChange)="onChangedSettings2($event)" [disableAlpha]="true"></color-chrome>
-</nb-card>
 
-
-<nb-card>
-  <h1>Custom Palette</h1>
-  <p>{{this.customModeColors[0]}}</p>
-  <p>{{this.customModeColors[1]}}</p>
-  <p>{{this.customModeColors[2]}}</p>
-  <p>{{this.customModeColors[3]}}</p>
-  <p>{{this.customModeColors[4]}}</p>
-  <p>{{this.customModeColors[5]}}</p>
-  <p>{{this.customModeColors[6]}}</p>
-  <p>{{this.customModeColors[7]}}</p>
-  <p>{{this.customModeColors[8]}}</p>
-  <p>{{this.customModeColors[9]}}</p>
-  <p>{{this.customModeColors[10]}}</p>
-  <p>{{this.customModeColors[11]}}</p>
-  <p>{{this.customModeColors[12]}}</p>
-  <p>{{this.customModeColors[13]}}</p>
-  <p>{{this.customModeColors[14]}}</p>
-  <p>{{this.customModeColors[15]}}</p>
-  
-
-  <input type="number" [(ngModel)]="paletteNumber">
-  <color-chrome (onChangeComplete)="setCustomModeColor($event, paletteNumber)" [disableAlpha]="true"></color-chrome>
-  <button (click)="pushCustomPalette()">Send color</button>
-</nb-card>
-
-
+<ng-template #noConnection>
+  <nb-card>
+    <nb-card-body>
+      <p>No connection to the server</p>
+    </nb-card-body>
+  </nb-card>
+</ng-template>
