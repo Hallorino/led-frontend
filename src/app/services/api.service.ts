@@ -40,4 +40,8 @@ export class ApiService {
   updateSettings(settings: Settings): Observable<Settings> {
     return this.http.patch<Settings>(`http://${this.baseUrl}/settings/`, settings);
   }
+
+  updateCustomPalette(colorArray : string[]): Observable<any> {
+    return this.http.patch<any>(`http://${this.baseUrl}/modes/custom`, colorArray);
+  }
 }

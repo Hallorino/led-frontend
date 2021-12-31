@@ -37,6 +37,37 @@
 
   </nb-card-body>
 </nb-card>
-<p>{{currentSettings.currentColor}}</p>
-<color-chrome (onChange)="onChangedSettings2($event)" [disableAlpha]="true"rome>
+
+<nb-card>
+  <h1>Custom color</h1>
+  <p>{{currentSettings.currentColor}}</p>
+  <color-chrome (onChange)="onChangedSettings2($event)" [disableAlpha]="true"></color-chrome>
+</nb-card>
+
+
+<nb-card>
+  <h1>Custom Palette</h1>
+  <p>{{this.customModeColors[0]}}</p>
+  <p>{{this.customModeColors[1]}}</p>
+  <p>{{this.customModeColors[2]}}</p>
+  <p>{{this.customModeColors[3]}}</p>
+  <p>{{this.customModeColors[4]}}</p>
+  <p>{{this.customModeColors[5]}}</p>
+  <p>{{this.customModeColors[6]}}</p>
+  <p>{{this.customModeColors[7]}}</p>
+  <p>{{this.customModeColors[8]}}</p>
+  <p>{{this.customModeColors[9]}}</p>
+  <p>{{this.customModeColors[10]}}</p>
+  <p>{{this.customModeColors[11]}}</p>
+  <p>{{this.customModeColors[12]}}</p>
+  <p>{{this.customModeColors[13]}}</p>
+  <p>{{this.customModeColors[14]}}</p>
+  <p>{{this.customModeColors[15]}}</p>
+  
+
+  <input type="number" [(ngModel)]="paletteNumber">
+  <color-chrome (onChangeComplete)="setCustomModeColor($event, paletteNumber)" [disableAlpha]="true"></color-chrome>
+  <button (click)="onChangedSettings()">Send color</button>
+</nb-card>
+
 

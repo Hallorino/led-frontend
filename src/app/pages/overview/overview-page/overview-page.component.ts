@@ -21,7 +21,10 @@ export class OverviewPageComponent implements OnInit {
     {name: "Forest"},
     {name: "Party"}
   ];
-  
+
+  customModeColors = ["#000000", "#000000", "#000000", "#000000", "#000000", "#000000", "#000000", "#000000", "#000000", "#000000", "#000000", "#000000", "#000000", "#000000", "#000000", "#000000"];
+  paletteNumber = 0;
+
   buttontext: string = "mein string";
   buttonclick: number = 0;
   currentSettings: Settings = {
@@ -59,6 +62,18 @@ export class OverviewPageComponent implements OnInit {
     this.currentSettings.currentMode = 1;
 
     this.api.updateSettings(this.currentSettings).subscribe((newSettings: Settings) => {
+      this.currentSettings = newSettings;
+    });
+  }
+
+  setCustomModeColor($event : ColorEvent, index: number) {
+    let hexString = $event.color.hex;
+    this.customModeColors[index] = hexString.replace("#", "0x");
+    console.log(this.customModeColors[index]);
+  }
+
+  pushCustomPalette() {
+    this.api.updateCustomPalette(this.customModeColors).subscribe((newSettings: Settings) => {
       this.currentSettings = newSettings;
     });
   }
