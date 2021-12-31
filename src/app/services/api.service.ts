@@ -30,7 +30,7 @@ export class ApiService {
   }
 
   getAllModes(): Observable<Mode[]> {
-    return this.http.get<Mode[]>(`http://${this.baseUrl}/modes/`);
+    return this.http.get<Mode[]>(`http://${this.baseUrl}/palettes/`);
   }
 
   getSettings(): Observable<Settings> {
