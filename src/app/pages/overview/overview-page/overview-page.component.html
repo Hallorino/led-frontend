@@ -26,6 +26,13 @@
             ceil: 255
           }" (valueChange)="onChangedSettings()"></ngx-slider>
 
+        <h2>Step</h2>
+
+        <ngx-slider [(value)]="currentSettings.currentStep" [options]="{
+              floor: -3,
+              ceil: 3
+            }" (valueChange)="onChangedSettings()"></ngx-slider>
+
         <h2>Blend</h2>
 
         <nb-toggle [(ngModel)]="currentSettings.hasBlend" (change)="onChangedSettings()">HasBlend</nb-toggle>
@@ -49,9 +56,10 @@
           <p>{{ this.customModeColors[13] }}</p>
           <p>{{ this.customModeColors[14] }}</p>
           <p>{{ this.customModeColors[15] }}</p>
-        
+
           <input type="number" [(ngModel)]="paletteNumber" />
-          <color-chrome (onChangeComplete)="setCustomModeColor($event, paletteNumber)" [disableAlpha]="true"></color-chrome>
+          <color-chrome (onChangeComplete)="setCustomModeColor($event, paletteNumber)" [disableAlpha]="true">
+          </color-chrome>
           <button (click)="pushCustomPalette()">Send color</button>
         </div>
 

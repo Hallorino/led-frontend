@@ -25,6 +25,7 @@ export class OverviewPageComponent implements OnInit {
   currentSettings: Settings ={
     currentMode: 0,
     currentColor: "0x000000",
+    currentStep: 0,
     brightness: 0,
     currentPalette: "",
     fps: 0,

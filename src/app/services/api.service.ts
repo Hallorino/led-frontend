@@ -42,6 +42,6 @@ export class ApiService {
   }
 
   updateCustomPalette(colorArray : string[]): Observable<any> {
-    return this.http.patch<any>(`http://${this.baseUrl}/modes/custom`, colorArray);
+    return this.http.patch<any>(`http://${this.baseUrl}/palettes/custom`, colorArray);
   }
 }
