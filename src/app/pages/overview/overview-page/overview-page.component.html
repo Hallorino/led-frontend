@@ -3,8 +3,8 @@
     <h1>Settings</h1>
   </nb-card-header>
   <nb-card-body>
-    <nb-tabset fullWidth>
-      <nb-tab tabTitle="Palette" active="{{changeMode(0)}}">
+    <nb-tabset fullWidth (changeTab)="changeMode($event)">
+      <nb-tab tabTitle="Palette" tabId="0">
         <h2>Mode</h2>
 
         <nb-select [(selected)]="currentSettings.currentPalette" (selectedChange)="onChangedSettings()">
@@ -65,7 +65,7 @@
 
       </nb-tab>
 
-      <nb-tab tabTitle="Color" active="{{changeMode(1)}}">
+      <nb-tab tabTitle="Color" tabId="1">
         <h2>Brightness</h2>
 
         <ngx-slider [(value)]="currentSettings.brightness" [options]="{
@@ -78,7 +78,7 @@
         <color-chrome (onChange)="onChangedColor($event)" [disableAlpha]="true"></color-chrome>
       </nb-tab>
 
-      <nb-tab tabTitle="Effect" active="{{changeMode(2)}}">
+      <nb-tab tabTitle="Effect" tabId="2">
         <h2>Mode</h2>
 
         <nb-select [(selected)]="currentSettings.currentEffect" (selectedChange)="onChangedSettings()">

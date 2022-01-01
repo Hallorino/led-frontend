@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NbRouteTab, NbTabComponent } from '@nebular/theme';
 import { ColorEvent } from 'ngx-color';
 import { Effect } from 'src/app/models/effect.model';
 import { Mode } from 'src/app/models/mode.model';
@@ -13,8 +14,6 @@ import { ApiService } from 'src/app/services/api.service';
 export class OverviewPageComponent implements OnInit {
 
   constructor(private api: ApiService) { }
-
-  currentMode = 0;
 
   modes : Mode[] = [];
   effects : Effect[] = [];
@@ -74,8 +73,8 @@ export class OverviewPageComponent implements OnInit {
     });
   }
 
-  changeMode(mode: number) {
-    this.currentMode = mode;
+  changeMode($event: NbTabComponent) {
+    this.currentSettings.currentMode = parseInt($event.tabId);
   }
 
   updateStep(value :any) {
