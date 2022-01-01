@@ -77,6 +77,22 @@
         <p>{{ currentSettings.currentColor }}</p>
         <color-chrome (onChange)="onChangedColor($event)" [disableAlpha]="true"></color-chrome>
       </nb-tab>
+
+      <nb-tab tabTitle="Effect" active="{{changeMode(2)}}">
+        <h2>Mode</h2>
+
+        <nb-select [(selected)]="currentSettings.currentEffect" (selectedChange)="onChangedSettings()">
+          <nb-select-label>Selected: {{ currentSettings.currentEffect }}</nb-select-label>
+          <nb-option *ngFor="let effect of effects" [value]="effect.name">{{effect.name}}</nb-option>
+        </nb-select>
+
+        <div *ngIf="hasCurrentEffectCustomColor()">
+          <h2>Custom color</h2>
+          <p>{{ currentSettings.currentColor }}</p>
+          <color-chrome (onChange)="onChangedColor($event)" [disableAlpha]="true"></color-chrome>
+        </div>
+
+      </nb-tab>
     </nb-tabset>
   </nb-card-body>
 </nb-card>

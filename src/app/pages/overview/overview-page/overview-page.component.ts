@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ColorEvent } from 'ngx-color';
+import { Effect } from 'src/app/models/effect.model';
 import { Mode } from 'src/app/models/mode.model';
 import { Settings } from 'src/app/models/settings.model';
 import { ApiService } from 'src/app/services/api.service';
@@ -16,6 +17,7 @@ export class OverviewPageComponent implements OnInit {
   currentMode = 0;
 
   modes : Mode[] = [];
+  effects : Effect[] = [];
 
   customModeColors = ["#000000", "#000000", "#000000", "#000000", "#000000", "#000000", "#000000", "#000000", "#000000", "#000000", "#000000", "#000000", "#000000", "#000000", "#000000", "#000000"];
   paletteNumber = 0;
@@ -25,6 +27,7 @@ export class OverviewPageComponent implements OnInit {
   currentSettings: Settings ={
     currentMode: 0,
     currentColor: "0x000000",
+    currentEffect: "FadeInOut",
     currentStep: 0,
     brightness: 0,
     currentPalette: "",
@@ -39,6 +42,9 @@ export class OverviewPageComponent implements OnInit {
   getDataFromApi() {
     this.api.getAllModes().subscribe(modes => {
       this.modes = modes;
+    });
+    this.api.getAllEffects().subscribe(effects => {
+      this.effects = effects;
     });
     this.api.getSettings().subscribe(settings => {
       this.currentSettings = settings;
@@ -75,5 +81,14 @@ export class OverviewPageComponent implements OnInit {
   updateStep(value :any) {
     this.currentSettings.currentStep = value[0];
     this.onChangedSettings();
+  }
+
+  hasCurrentEffectCustomColor() : boolean {
+    for (let effect of this.effects) {
+      if (effect.name == this.currentSettings.currentEffect) {
+        return effect.hasCustomColor;
+      }
+    }
+    return false;
   }
 }

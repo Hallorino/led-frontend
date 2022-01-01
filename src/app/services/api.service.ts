@@ -4,6 +4,7 @@ import { environment } from 'src/environments/environment';
 import { Mode } from 'src/app/models/mode.model';
 import { Observable } from 'rxjs';
 import { Settings } from 'src/app/models/settings.model';
+import { Effect } from '../models/effect.model';
 
 
 @Injectable({
@@ -31,6 +32,10 @@ export class ApiService {
 
   getAllModes(): Observable<Mode[]> {
     return this.http.get<Mode[]>(`http://${this.baseUrl}/palettes/`);
+  }
+
+  getAllEffects(): Observable<Effect[]> {
+    return this.http.get<Effect[]>(`http://${this.baseUrl}/effects/`);
   }
 
   getSettings(): Observable<Settings> {
